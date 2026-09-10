@@ -112,10 +112,16 @@ A:
 
 2.按照图片指示绑定邮箱
 
-3.退出登陆，再通过邮箱登陆 第一次登陆的时候需要选择忘记密码 然后通过邮箱来重置密码 
+3.退出登陆 再通过邮箱登陆 第一次登陆的时候需要选择忘记密码 然后通过邮箱来重置密码 
 
-4.拿到重置后的密码和邮箱 按照教程填写即可
+4.确认重置之后 会发邮件到指定的邮箱里面 里面会包含重置后的密码 拿到重置后的密码和邮箱 按照教程填写即可
 <img width="2276" height="1415" alt="cac64968dbc60bfa3a90f288da42b6e9" src="https://github.com/user-attachments/assets/eb0d7d10-ecfa-468e-9905-b18eb34594d3" />
+
+<img width="2263" height="1415" alt="image" src="https://github.com/user-attachments/assets/69db98ab-045c-458f-a4b0-8323310ffa64" />
+
+<img width="2263" height="1415" alt="cff6a3d85c2f200756706920940474ba" src="https://github.com/user-attachments/assets/42860695-2306-4df2-b87d-614c979b690d" />
+
+<img width="2263" height="1415" alt="3d64114db0c8512b25afe0230a969a2c" src="https://github.com/user-attachments/assets/85d92b3f-b06c-4236-9d5b-cbd04331ed14" />
 
 
 ## 📜 更新日志
