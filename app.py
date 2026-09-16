@@ -1305,34 +1305,36 @@ def browser_login_complete(
 
     with sync_playwright() as p:
 
-        browser = p.chromium.launch(
-
-            headless=True,
-
-            args=[
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-gpu",
-                "--disable-blink-features=AutomationControlled",
-            ],
-
-            proxy=proxy_config,
-        )
-
-        context = browser.new_context(
-
-            viewport={
-                "width": 1920,
-                "height": 1080,
-            },
-
-            user_agent=USER_AGENT,
-        )
-
-        page = context.new_page()
+        browser = None
 
         try:
+
+            browser = p.chromium.launch(
+
+                headless=True,
+
+                args=[
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--disable-gpu",
+                    "--disable-blink-features=AutomationControlled",
+                ],
+
+                proxy=proxy_config,
+            )
+
+            context = browser.new_context(
+
+                viewport={
+                    "width": 1920,
+                    "height": 1080,
+                },
+
+                user_agent=USER_AGENT,
+            )
+
+            page = context.new_page()
 
             # ------------------------------------------------
             # Step 1：访问登录页
@@ -1806,16 +1808,25 @@ def browser_login_complete(
         except Exception:
 
             # 不打印异常
-            stage = "UNEXPECTED"
+            # browser 未创建成功说明是启动阶段失败
+            if browser is None:
+
+                stage = "BROWSER_LAUNCH_FAIL"
+
+            else:
+
+                stage = "UNEXPECTED"
 
             result = None
 
         finally:
 
-            try:
-                browser.close()
-            except Exception:
-                pass
+            if browser is not None:
+
+                try:
+                    browser.close()
+                except Exception:
+                    pass
 
     return result, stage
 
@@ -2148,11 +2159,12 @@ def main():
         # 不打印任何敏感信息
         sys.exit(130)
 
-    except Exception:
+    except Exception as exc:
 
         # 不打印 traceback
-        # 不打印 exception 内容
-        log("脚本执行失败")
+        # 不打印 exception 内容（可能含敏感信息）
+        # 只打印异常类型，便于定位
+        log(f"脚本执行失败: {type(exc).__name__}")
 
         send_telegram(
             "❌ <b>签到脚本执行失败</b>"
